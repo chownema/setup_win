@@ -14,7 +14,8 @@ $includePathArray =
 'C:\ProgramData\chocolatey\bin',
 'C:\Program Files\Git\cmd',
 'C:\Program Files\Amazon\AWSCLI\bin\',
-'C:\Users\chown\AppData\Local\Programs\Microsoft VS Code\Code.exe';
+'C:\Users\chown\AppData\Local\Programs\Microsoft VS Code\Code.exe',
+'C:\Users\chown\flutter\bin';
 
 ForEach ($includeP in $includePathArray) {
     $existsInArray = 0;
