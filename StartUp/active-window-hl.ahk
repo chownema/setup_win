@@ -1,7 +1,7 @@
 #Persistent
 #SingleInstance,force
 SetTimer, DrawRect, 50
-border_thickness = 6
+border_thickness = 12
 border_color = 9B4C48
 DrawRect:
 WinGetPos, x, y, w, h, A
