@@ -1,2 +1,221 @@
-Alt & /::Send {RWin down}{Tab down}{Tab up}{RWin up}
+; ;; Start Mouse movement
+; #KeyHistory
+; #MaxHotkeysPerInterval, 10000
+
+; DEFAULT_SPEED = 1
+; DEFAULT_SPEED_MULTIPLIER = 10
+
+; BASE_SPEED = 1
+; BASE_SPEED_MULTIPLIER = 10
+
+; isMovingMouse = false
+; canMoveMouse = false
+
+; ; speed multiplier
+; $r::
+; {
+;   if (canMoveMouse = "true") {
+;     BASE_SPEED = 0.3
+;     BASE_SPEED_MULTIPLIER = 5;
+;   } else {
+;     Send r
+;   }
+;   Return
+; }
+
+; $s::
+; {
+;   if (canMoveMouse = "true") {
+;     BASE_SPEED = 0.3
+;     BASE_SPEED_MULTIPLIER = 40
+;   } else {
+;     Send s
+;   }
+;   Return
+; }
+
+; $r Up::
+; $s Up::
+; {
+;   BASE_SPEED = %DEFAULT_SPEED%
+;   BASE_SPEED_MULTIPLIER = %DEFAULT_SPEED_MULTIPLIER%
+;   Return
+; }
+
+; $g::
+; {
+;   if (canMoveMouse = "true") {
+;     Click, down, middle
+;   } else {
+;     Send g
+;   }
+;   Return
+; }
+
+; $g Up::
+; {
+;   if (canMoveMouse = "true") {
+;     Click, up, middle
+;   }
+;   Return
+; }
+
+; $f::
+; {
+;   if (canMoveMouse = "true") {
+;     Click down
+;   } else {
+;     Send f
+;   }
+;   Return
+; }
+; $f Up::
+; {
+;   if (GetKeyState("d", "P")) {
+;     Click up
+;   }
+;   Return
+; }
+
+; $v::
+; {
+;   if (GetKeyState("d", "P")) {
+;     Click, down, right
+;   } else {
+;     Send v
+;   }
+;   Return
+; }
+; $v Up::
+; {
+;   if (GetKeyState("d", "P")) {
+;     Click, up, right
+;   }
+;   Return
+; }
+
+
+; $h::
+; {
+;   if (canMoveMouse = "true") {
+;     isMovingMouse = true
+;     While GetKeyState("h", "P") {
+;       if (GetKeyState("j", "P")) {
+;         MouseMove, -%BASE_SPEED_MULTIPLIER%, %BASE_SPEED_MULTIPLIER%, %BASE_SPEED%, R
+;       } else if (GetKeyState("k", "P")) {
+;         MouseMove, -%BASE_SPEED_MULTIPLIER%, -%BASE_SPEED_MULTIPLIER%, %BASE_SPEED%, R
+;       } else {
+;         MouseMove, -%BASE_SPEED_MULTIPLIER%, 0, %BASE_SPEED%, R
+;       }
+;     }
+;   } else {
+;     Send h
+;   }
+;   Return
+; }
+
+; $l::
+; {
+;   if (canMoveMouse = "true") {
+;     isMovingMouse = true
+;     While GetKeyState("l", "P") {
+;       if (GetKeyState("j", "P")) {
+;         MouseMove, %BASE_SPEED_MULTIPLIER%, %BASE_SPEED_MULTIPLIER%, %BASE_SPEED%, R
+;       } else if (GetKeyState("k", "P")) {
+;         MouseMove, %BASE_SPEED_MULTIPLIER%, -%BASE_SPEED_MULTIPLIER%, %BASE_SPEED%, R
+;       } else {
+;         MouseMove, %BASE_SPEED_MULTIPLIER%, 0, %BASE_SPEED%, R
+;       }
+;     }
+;   } else {
+;     Send l
+;   }
+;   Return
+; }
+
+; ; DOWN
+; $j::
+; {
+;   if (canMoveMouse = "true") {
+;     isMovingMouse = true
+;     While GetKeyState("j", "P") {
+;       if (GetKeyState("h", "P")) {
+;         MouseMove, -%BASE_SPEED_MULTIPLIER%, %BASE_SPEED_MULTIPLIER%, %BASE_SPEED%, R
+;       } else if (GetKeyState("l", "P")) {
+;         MouseMove, %BASE_SPEED_MULTIPLIER%, %BASE_SPEED_MULTIPLIER%, %BASE_SPEED%, R
+;       } else if (GetKeyState("x", "P")) {
+;         Click, WheelDown
+;         Sleep, 50
+;       } else {
+;         MouseMove, 0, %BASE_SPEED_MULTIPLIER%, %BASE_SPEED%, R
+;       }
+;     }
+;   } else {
+;     Send j
+;   }
+;   Return
+; }
+
+; ; UP
+; $k::
+; {
+;   if (canMoveMouse = "true") {
+;     isMovingMouse = true
+;     While GetKeyState("k", "P") {
+;       if (GetKeyState("h", "P")) { ; also move cursor left
+;         MouseMove, -%BASE_SPEED_MULTIPLIER%, -%BASE_SPEED_MULTIPLIER%, %BASE_SPEED%, R
+;       } else if (GetKeyState("l", "P")) { ; also move cursor right
+;         MouseMove, %BASE_SPEED_MULTIPLIER%, -%BASE_SPEED_MULTIPLIER%, %BASE_SPEED%, R
+;       } else if (GetKeyState("x", "P")) { ; mousewheel
+;         Click, WheelUp
+;         Sleep, 50
+;       } else { ; move cursor up
+;         MouseMove, 0, -%BASE_SPEED_MULTIPLIER%, %BASE_SPEED%, R
+;       }
+;     }
+;   } else {
+;     Send k
+;   }
+;   Return
+; }
+
+; $d::
+; {
+;   if ((A_PriorKey = "f") or (A_PriorKey="k")) and (A_TimeSincePriorHotkey < 50) {
+;     Send {BackSpace}
+;     canMoveMouse = true
+;     KeyWait, d
+;   } else {
+;     Send d
+;   }
+;   Return
+; }
+
+; $d Up::
+; {
+;   isMovingMouse = false
+;   canMoveMouse = false
+; }
+
+;; ======================================================================================
+
+;; Start Keybindngs note: inplicit retrun after "::"
+; Taskview
+^!/::Send {RWin down}{Tab down}{Tab up}{RWin up}
+^!n:: Send {RWin down}{Ctrl down}{Right down}{Ctrl up}{RWin up}{Right up} 
+
+^!p::Send {RWin down}{Ctrl down}{Left down}{Ctrl up}{RWin up}{Left up}
+; if GetKeyState("p", "P") {
+;   Send {RWin down}{Ctrl down}{Left down}{Tab up}{Ctrl up}{RWin up}{Left up}
+;   Return
+; } else {
+;   Return
+; }
+
+;; Win Remap
+RAlt::RWin
+
+; Alt f4
+; Ctrl + Alt + q
 ^!q::Send {alt down}{f4 down}{f4 up}{alt up}
+;; End Keybindngs
