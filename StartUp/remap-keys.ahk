@@ -22,5 +22,5 @@ RAlt::RWin
 ;; End Keybindngs
 
 ;; Remap AltTab
-; LControl & n::AltTab
+^!'::AltTabMenu
 ; LControl & p::ShiftAltTab
