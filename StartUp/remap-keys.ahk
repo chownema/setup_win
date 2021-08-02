@@ -20,3 +20,7 @@ RAlt::RWin
 ; Ctrl + Alt + q
 ^!q::Send {alt down}{f4 down}{f4 up}{alt up}
 ;; End Keybindngs
+
+;; Remap AltTab
+; LControl & n::AltTab
+; LControl & p::ShiftAltTab
