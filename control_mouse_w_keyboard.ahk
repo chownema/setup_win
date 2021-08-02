@@ -1,7 +1,7 @@
  ; ============================================================
 
 DEFAULT_SPEED = 15
-DEFAULT_SPEED_MULTIPLIER = 2
+DEFAULT_SPEED_MULTIPLIER = 1.5
 
 CURRENT_X = 0
 CURRENT_Y = 0
@@ -30,7 +30,7 @@ canMouseTurboMove = false
 	return
 }
 ; Decrease
-^!n::
+<+^!m::
 {
 	DEFAULT_SPEED := DEFAULT_SPEED / DEFAULT_SPEED_MULTIPLIER
 	return
