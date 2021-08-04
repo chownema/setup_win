@@ -24,3 +24,7 @@ RAlt::RWin
 ;; Remap AltTab
 ^!'::AltTabMenu
 ; LControl & p::ShiftAltTab
+
+;; Add pgup/dn
+!Down::PgDn
+!Up::PgUp

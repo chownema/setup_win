@@ -10,6 +10,16 @@ canMouseTurboMove = false
 
 ; Switch to turn on and off move mouse mode
 ; TODO: bug, canMoveMouse is treated as true at first run
+Esc::
+{
+	if canMoveMouse {
+		canMoveMouse := false
+		SoundBeep 500 ; Lower tone
+	} else {
+		send {Esc}
+	}
+	return
+}
 ^!,::
 {
 	if canMoveMouse {
@@ -63,7 +73,8 @@ if canMoveMouse {
 	$h::
 	{
 		if canMoveMouse {
-			MouseMove, -%DEFAULT_SPEED%, 0, 0, R
+			DllCall("mouse_event", uint, 1, int, 100, int, 0)
+			; MouseMove, -%DEFAULT_SPEED%, 0, 0, R
 		} else {
 			send h
 		}
