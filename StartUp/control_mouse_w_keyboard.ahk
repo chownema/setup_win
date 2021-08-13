@@ -2,6 +2,8 @@
 
 DEFAULT_SPEED = 15
 DEFAULT_SPEED_MULTIPLIER = 1.5
+SPEED_SOUND_TONE = 100
+SPEED_SOUND_TONE_INCREASE = 25
 
 CURRENT_X = 0
 CURRENT_Y = 0
@@ -36,12 +38,16 @@ Esc::
 ; Increase
 ^!m::
 {
+	SPEED_SOUND_TONE := SPEED_SOUND_TONE + SPEED_SOUND_TONE_INCREASE
+	SoundBeep %SPEED_SOUND_TONE%
 	DEFAULT_SPEED := DEFAULT_SPEED * DEFAULT_SPEED_MULTIPLIER
 	return
 }
 ; Decrease
 <+^!m::
 {
+	SPEED_SOUND_TONE := SPEED_SOUND_TONE - SPEED_SOUND_TONE_INCREASE
+	SoundBeep %SPEED_SOUND_TONE%
 	DEFAULT_SPEED := DEFAULT_SPEED / DEFAULT_SPEED_MULTIPLIER
 	return
 }
@@ -73,8 +79,7 @@ if canMoveMouse {
 	$h::
 	{
 		if canMoveMouse {
-			DllCall("mouse_event", uint, 1, int, 100, int, 0)
-			; MouseMove, -%DEFAULT_SPEED%, 0, 0, R
+			MouseMove, -%DEFAULT_SPEED%, 0, 0, R
 		} else {
 			send h
 		}
