@@ -12,16 +12,6 @@ canMouseTurboMove = false
 
 ; Switch to turn on and off move mouse mode
 ; TODO: bug, canMoveMouse is treated as true at first run
-Esc::
-{
-	if canMoveMouse {
-		canMoveMouse := false
-		SoundBeep 500 ; Lower tone
-	} else {
-		send {Esc}
-	}
-	return
-}
 ^!,::
 {
 	if canMoveMouse {
