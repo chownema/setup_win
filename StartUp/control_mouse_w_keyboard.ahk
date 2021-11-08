@@ -10,13 +10,56 @@ CURRENT_Y = 0
 canMoveMouse = false
 canMouseTurboMove = false
 
+; Global ThisKey, 2PriorKey
+; ih := InputHook()
+; ih.KeyOpt("{All}", "NV")
+; ih.OnKeyDown := Func("priorKeyHandler")
+; ih.OnKeyUp := Func("postKeyHandler")
+; ih.BackspaceIsUndo := false
+; ih.Start()
+
+; ;start ToolTip
+; SetTimer, ToolTip, 50
+; ToolTip:
+; ToolTip :=
+; ( Join
+; 	"ThisKey:`t" ThisKey
+; 	"`nA_PriorKey:`t" A_PriorKey
+; 	"`n2PriorKey:`t" 2PriorKey
+; )
+; if ToolTip <> OldToolTip
+; 	ToolTip,% OldToolTip := ToolTip
+; Return
+; ;ToolTip end
+
+; postKeyHandler(ih, vk, sc)
+; {
+; 	2PriorKey := A_PriorKey
+; 	; ThisKey := GetKeyName(Format("vk{1:x}sc{2:x}", vk, sc))
+; 	ThisKey := vk
+; 	if (vk = "68") {
+; 		Click, up
+; 	}
+; 	return
+; }
+; priorKeyHandler(ih, vk, sc)
+; {
+; 	2PriorKey := A_PriorKey
+; 	; ThisKey := GetKeyName(Format("vk{1:x}sc{2:x}", vk, sc))
+; 	ThisKey := vk
+; 	if (vk = "68") {
+; 		Click, Down
+; 	}
+; 	return
+; }
+
 ; Switch to turn on and off move mouse mode
 ; TODO: bug, canMoveMouse is treated as true at first run
 ^!,::
 {
 	if canMoveMouse {
 		canMoveMouse := false
-		SoundBeep 500 ; Lower tone
+		SoundBeep 250 ; Lower tone
 	} else {
 		canMoveMouse := true
 		SoundBeep 750 ; Higher tone
@@ -45,6 +88,27 @@ canMouseTurboMove = false
 
 ; Mouse emulation code
 if canMoveMouse {
+
+	$d::
+	{
+		; key_state := GetKeyState("d", "P")
+		; if (key_state = 1) {
+		; 	return
+		; } else {
+		; 	Send % "{" A_ThisHotkey "}"
+		; }
+
+		if canMoveMouse {
+			while GetKeyState("d", "P") {
+				Click, Down
+			}
+			Click Up
+		} else {
+			send d
+		}
+		return
+	}
+
 	; Movement 
 	$j::
 	{
@@ -86,16 +150,30 @@ if canMoveMouse {
 		return
 	}
 
+
+	; while GetKeyState("d", "P") {
+	; 	Click, Down
+	; }
+	; if GetKeyState("d", "U")
+	; Click, Up
+
 	; Clicks
-	$d::
-	{
-		if canMoveMouse {
-			MouseClick, left
-		} else {
-			send d
-		}
-		return
-	}
+	; $d::
+	; {
+	; 	key_state := GetKeyState("d", "P")
+	; 	if (key_state = 1) {
+	; 		return
+	; 	} else {
+	; 		Send % "{" A_ThisHotkey "}"
+	; 	}
+	; 	; if canMoveMouse {
+	; 	; 	MouseClick, left
+	; 		; send d
+	; 	; } else {
+	; 	; 	send d
+	; 	; }
+	; 	; return
+	; }
 
 	$f::
 	{
@@ -117,10 +195,10 @@ if canMoveMouse {
 		return
 	}
 
-	; Scroll Wheel
-	; Alt
 	!u::MouseClick, WheelUp
 	!d::MouseClick, WheelDown
+
+
 } else {
 	return
 }

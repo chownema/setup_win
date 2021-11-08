@@ -52,5 +52,6 @@ Return
 priorKeyHandler(ih, vk, sc)
 {
 	2PriorKey := A_PriorKey
-	ThisKey := GetKeyName(Format("vk{1:x}sc{2:x}", vk, sc))
+	; ThisKey := GetKeyName(Format("vk{1:x}sc{2:x}", vk, sc))
+	ThisKey := vk
 }
